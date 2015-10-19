@@ -1,0 +1,31 @@
+{
+  "name": "wunderground-pws",
+  "version": "1.0.0",
+  "description": "Weather Underground PWS API library for Node.js",
+  "main": "main.js",
+  "scripts": {
+    "pretest": "./node_modules/jshint/bin/jshint lib/wunderground-pws.js",
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fauria/wunderground-pws.git"
+  },
+  "keywords": [
+    "wunderground",
+    "pws",
+    "weather",
+    "underground"
+  ],
+  "author": "Fer Uría <fauria@gmail.com> (https://github.com/fauria)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fauria/wunderground-pws/issues"
+  },
+  "homepage": "https://github.com/fauria/wunderground-pws#readme",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "jshint": "^2.8.0",
+    "mocha": "^2.3.3"
+  }
+}
