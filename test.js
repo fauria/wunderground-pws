@@ -12,12 +12,14 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     pws.should.have.property('sendObservations').that.is.a('function');
     done();
   });
+
   it('should return an array with every possible observation', function(done) {
     var pws = new PWS();
     var fields = pws.getFields();
     fields.should.be.an('array');
     done();
   });
+
   it('should return an object with default mandatory data', function(done) {
     var pws = new PWS('TESTING_STATION', 'TESTING_PASSWORD');
     var observations = pws.getObservations();
@@ -28,6 +30,7 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     observations.should.have.property('dateutc').that.is.a('string').and.equals('now');
     done();
   });
+
   it('should let the addition of a valid observation', function(done) {
     var pws = new PWS();
     var fields = pws.getFields();
@@ -36,13 +39,36 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     });
     done();
   });
+
+  it('should return an error when adding none observations', function(done) {
+    var pws = new PWS();
+    pws.setObservations().should.exist.and.be.instanceof(Error).and.have.property('message', 'No argument supplied to setObservations().');
+    done();
+  });
+
+  it('should return an error when adding wrong type observations', function(done) {
+    var pws = new PWS();
+    pws.setObservations([]).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');    
+    pws.setObservations(1).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
+    pws.setObservations(true).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
+    pws.setObservations(false).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
+    pws.setObservations(0).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
+    pws.setObservations((function(){return function(){}}())).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
+    done();
+  });
+
   it('should not let the addition of an invalid observation', function(done) {
     var pws = new PWS();
     pws.setObservations('INVALID_FIELD', 'TESTING_VALUE').should.exist.and.be.instanceof(Error).and.have.property('message', 'Observation INVALID_FIELD not supported by WU.');
     done();
   });
 
-  // Pending tests
+  it('should not let the addition of an invalid observation', function(done) {
+    var pws = new PWS();
+    pws.setObservations('INVALID_FIELD', 'TESTING_VALUE').should.exist.and.be.instanceof(Error).and.have.property('message', 'Observation INVALID_FIELD not supported by WU.');
+    done();
+  });
+
   it('should let the addition of valid observations from an object', function(done) {
     var pws = new PWS();
     var fields = pws.getFields();
@@ -73,5 +99,4 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
       done();
     });
   });
-
 });
