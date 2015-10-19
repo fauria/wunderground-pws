@@ -2,9 +2,7 @@ language: node_js
 node_js:
   - "stable"
   - "iojs"
-env:
-  global:
-    - CODECOV_TOKEN: :uuid-repo-token
 script:
   - istanbul cover node_modules/mocha/bin/_mocha
-  - cat ./coverage/coverage.json | node_modules/codecov.io/bin/codecov.io.js
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
