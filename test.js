@@ -43,8 +43,29 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
   });
 
   // Pending tests
-  it('should let the addition of valid observations from an object');
-  it('should not let the addition of invalid observations from an object');
+  it('should let the addition of valid observations from an object', function(done) {
+    var pws = new PWS();
+    var fields = pws.getFields();
+    var observations = {};
+    fields.forEach(function(field){
+      observations[field] = 'TESTING_VALUE';
+    });
+    pws.setObservations(observations).should.equal(true);
+    observations.should.deep.equal(pws.getObservations());
+    done();
+  });
+
+  it('should not let the addition of invalid observations from an object', function(done) {
+    var pws = new PWS();
+    var fields = pws.getFields();
+    var observations = {
+      INVALID_FIELD: 'TESTING_VALUE'
+    };
+    pws.setObservations(observations).should.equal(true);
+    pws.getObservations().should.be.an('object').and.not.have.property('INVALID_FIELD');
+    done();
+  });
+
   it('should not let send observations without credentials', function(done){
     var pws = new PWS();
     pws.sendObservations(function(error, result){
