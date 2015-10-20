@@ -79,6 +79,5 @@ After a successful request, the observations are set as default:
 	PASSWORD: 'MY_PASSWORD',
 	action: 'updateraw',
 	dateutc: 'now'
-	
 }
 ```
