@@ -34,15 +34,6 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     done();
   });
 
-  it('should let the addition of a valid observation', function(done) {
-    var pws = new PWS();
-    var fields = pws.getFields();
-    fields.forEach(function(field){
-      pws.setObservations(field, 'TESTING_VALUE').should.equal(true);
-    });
-    done();
-  });
-
   it('should return an error when adding none observations', function(done) {
     var pws = new PWS();
     pws.setObservations().should.exist.and.be.instanceof(Error).and.have.property('message', 'No argument supplied to setObservations().');
@@ -60,9 +51,12 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     done();
   });
 
-  it('should not let the addition of an invalid observation', function(done) {
+  it('should let the addition of a valid observation', function(done) {
     var pws = new PWS();
-    pws.setObservations('INVALID_FIELD', 'TESTING_VALUE').should.exist.and.be.instanceof(Error).and.have.property('message', 'Observation INVALID_FIELD not supported by WU.');
+    var fields = pws.getFields();
+    fields.forEach(function(field){
+      pws.setObservations(field, 'TESTING_VALUE').should.equal(true);
+    });
     done();
   });
 
@@ -92,6 +86,18 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     };
     pws.setObservations(observations).should.equal(true);
     pws.getObservations().should.be.an('object').and.not.have.property('INVALID_FIELD');
+    done();
+  });
+
+  it('should let reset the observations', function(done) {
+    var pws = new PWS();
+    var fields = pws.getFields();
+    fields.forEach(function(field){
+      pws.setObservations(field, 'TESTING_VALUE');
+    });
+    Object.keys(pws.getObservations()).length.should.equal(fields.length);
+    pws.resetObservations().should.equal(true);
+    Object.keys(pws.getObservations()).length.should.equal(4);
     done();
   });
 

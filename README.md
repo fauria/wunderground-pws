@@ -43,17 +43,25 @@ The library includes the following methods:
 
 Returns an array with every possible parameter used for observations. For a complete reference, check the [official API documentation](http://wiki.wunderground.com/index.php/PWS_-_Upload_Protocol).
 
+---
+
 `pws.setObservations(observation, value)`
 
 Sets a single observation value, or returns an `Error` object if not supported.
+
+---
 
 `pws.setObservations({observation1: value1, observation2: value2, ...})`
 
 Sets as many observations as present in the object passed as an argument, as long as they are valid.
 
+---
+
 `pws.getObservations()`
 
 Returns an object with the current observations.
+
+---
 
 `pws.sendObservations(callback)`
 
@@ -62,3 +70,5 @@ Sends the current observations to Weather Underground and executes the `callback
 It accepts two standard parameters, the first one being an `Error` object if the operation failed and the second `null`. 
 
 If successful, returns `null` as the first parameter and the string `'success'` as the second.
+
+After a successful request, the observations are set as default.
