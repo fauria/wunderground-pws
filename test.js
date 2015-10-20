@@ -3,6 +3,9 @@ var chai = require('chai');
 chai.should();
 
 describe('Tests for Node.js Weather Underground PWS API library', function(){
+
+  this.timeout(5000);
+
   it('should construct an object with valid properties', function(done) {
     var pws = new PWS();
     pws.should.be.an('object');
@@ -48,7 +51,7 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
 
   it('should return an error when adding wrong type observations', function(done) {
     var pws = new PWS();
-    pws.setObservations([]).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');    
+    pws.setObservations([]).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
     pws.setObservations(1).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
     pws.setObservations(true).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
     pws.setObservations(false).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid argument for setObservations().');
