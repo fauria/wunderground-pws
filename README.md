@@ -71,4 +71,14 @@ It accepts two standard parameters, the first one being an `Error` object if the
 
 If successful, returns `null` as the first parameter and the string `'success'` as the second.
 
-After a successful request, the observations are set as default.
+After a successful request, the observations are set as default:
+
+```javascript
+{
+	ID: 'MY_STATION_ID',
+	PASSWORD: 'MY_PASSWORD',
+	action: 'updateraw',
+	dateutc: 'now'
+	
+}
+```
