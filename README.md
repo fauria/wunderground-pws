@@ -63,6 +63,20 @@ Returns an object with the current observations.
 
 ---
 
+`pws.setRequestTimeout(milliseconds)`
+
+Sets the timeout before a request is considered invalid. Accepts the number of  `milliseconds` as an argument. If not specified, the default value will be `5000`.
+
+It will try cast whatever is passed as an argument to `Number()`, returning an `Error` object when `NaN`.
+
+---
+
+`pws.getRequestTimeout()`
+
+Returns the number of milliseconds set by `setRequestTimeout`, or `5000` by default.
+
+---
+
 `pws.sendObservations(callback)`
 
 Sends the current observations to Weather Underground and executes the `callback` function in an asynchronous way.

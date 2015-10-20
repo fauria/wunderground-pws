@@ -10,10 +10,12 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     var pws = new PWS();
     pws.should.be.an('object');
     pws.should.have.property('setObservations').that.is.a('function');
+    pws.should.have.property('setRequestTimeout').that.is.a('function');
+    pws.should.have.property('getRequestTimeout').that.is.a('function');
     pws.should.have.property('getObservations').that.is.a('function');
     pws.should.have.property('getFields').that.is.a('function');
     pws.should.have.property('sendObservations').that.is.a('function');
-    pws.should.have.property('resetObservations').that.is.a('function');    
+    pws.should.have.property('resetObservations').that.is.a('function');
     done();
   });
 
@@ -21,6 +23,27 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     var pws = new PWS();
     var fields = pws.getFields();
     fields.should.be.an('array');
+    done();
+  });
+
+  it('should return the default request timeout', function(done) {
+    var pws = new PWS();
+    pws.getRequestTimeout().should.be.a('number').and.equals(5000);
+    done();
+  });
+
+  it('should let change the default request timeout', function(done) {
+    var pws = new PWS();
+    pws.setRequestTimeout(3000).should.be.a('number').and.equals(3000);
+    pws.getRequestTimeout().should.be.a('number').and.equals(3000);
+    done();
+  });
+
+  it('should not let invalid request timeouts', function(done) {
+    var pws = new PWS();
+    pws.setRequestTimeout().should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid timeout.');
+    pws.setRequestTimeout({}).should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid timeout.');
+    pws.setRequestTimeout('TESTING_VALUE').should.exist.and.be.instanceof(Error).and.have.property('message', 'Invalid timeout.');
     done();
   });
 
