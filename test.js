@@ -13,6 +13,7 @@ describe('Tests for Node.js Weather Underground PWS API library', function(){
     pws.should.have.property('getObservations').that.is.a('function');
     pws.should.have.property('getFields').that.is.a('function');
     pws.should.have.property('sendObservations').that.is.a('function');
+    pws.should.have.property('resetObservations').that.is.a('function');    
     done();
   });
 
