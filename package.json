@@ -2,7 +2,7 @@
   "name": "wunderground-pws",
   "version": "1.0.0",
   "description": "Weather Underground PWS API library for Node.js",
-  "main": "main.js",
+  "main": "lib/wunderground-pws.js",
   "scripts": {
     "pretest": "./node_modules/jshint/bin/jshint lib/wunderground-pws.js",
     "test": "./node_modules/mocha/bin/mocha test.js"
