@@ -77,15 +77,9 @@ Returns the number of milliseconds set by `setRequestTimeout`, or `5000` by defa
 
 ---
 
-`pws.sendObservations(callback)`
+`pws.resetObservations()`
 
-Sends the current observations to Weather Underground and executes the `callback` function in an asynchronous way.
-
-It accepts two standard parameters, the first one being an `Error` object if the operation failed and the second `null`. 
-
-If successful, returns `null` as the first parameter and the string `'success'` as the second.
-
-After a successful request, the observations are set as default:
+Remove every observation from the payload, except the default values:
 
 ```javascript
 {
@@ -95,3 +89,38 @@ After a successful request, the observations are set as default:
 	dateutc: 'now'
 }
 ```
+
+---
+
+`pws.sendObservations(callback)`
+
+Sends the current observations to Weather Underground and executes the `callback` function in an asynchronous way.
+
+It accepts two standard parameters, the first one being an `Error` object if the operation failed and the second `null`. 
+
+If successful, returns `null` as the first parameter and the string `'success'` as the second.
+
+After a successful request, the observations are automatically reset.
+
+The MIT License
+=======
+
+Copyright (c) 2014 Fer Uría <fauria@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
